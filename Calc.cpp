@@ -2,6 +2,8 @@
 #include <string>
 using namespace std;
 
+//Created on 6/6/2019 by Alex Mazur
+
 int main() {
     
     bool stop  = false;
@@ -57,6 +59,7 @@ int main() {
         if (!error) {
             cout << "\nYour result is: " << result << endl;
         }
+        
         error = false;
     }  
 }
