@@ -18,7 +18,7 @@ int main() {
     string operand; 
 
     while (!stop) {
-        cout << "\nEnter an operation: ";
+        cout << "\nEnter an operation (Enter 'stop' to end): ";
         cin >> operand;
 
         if (operand == stopCommand) {
