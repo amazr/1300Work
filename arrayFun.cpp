@@ -8,6 +8,9 @@ int main() {
 	int arraySum = 0;
 	bool unsorted = true;
 
+	string isPalindrome = "";
+	string reverse;
+
 	cout << "Please enter an array length: ";
 	cin >> L;
 
@@ -53,5 +56,42 @@ int main() {
 		cout << endl;
 	}
 
+	//find if a string is a palindrome
+	cout << endl << "Enter a string to check its palindrome-nes: ";
+	cin >> isPalindrome;
 
+	for (int i = isPalindrome.size(); i > 0; i--) {
+		reverse += isPalindrome[i - 1];
+	}
+
+	if (reverse == isPalindrome) {
+		cout << "The string you entered is a palindrome!" << endl;
+	}
+	else {
+		cout << "The string you entered is definitely NOT a palindrome!" << endl;
+	}
+
+	//check the number of occurences in an array
+	char alphabet[26] = {'a','b','c','d','e','f', 'g','h','i', 'j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z' };
+	int occurences[26] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+	
+	cout << endl << "Number of character occurences: " << endl;
+	for (int i = 0; i < isPalindrome.size(); i++) {
+		for (int j = 0; j < 26; j++) {
+			if (isPalindrome[i] == alphabet[j]) {
+				occurences[j]++;
+				break;
+			}
+		}
+	}
+
+	for (int i = 0; i < 26; i++) {
+		if (occurences[i] != 0) {
+			cout << alphabet[i] << ": " << occurences[i] << endl;
+		}
+	}
+	cout << endl;
+	
+
+	return 0;
 }
