@@ -5,33 +5,48 @@ int main() {
 
 	int R = 3;
 	int C = 3;
+	int row;
+	int column;
 
 	string score[R][C] = {  {" "," "," "}, 
 							{" "," "," "}, 
 							{" "," "," "} };
 
-	string *score_pointer[R][C];
-
-	//set the pointer array to point to the score array
-	for (int i = 0; i < R; i++) {
-		for (int j = 0; j < C; j++) {
-			score_pointer[i][j] = &score[i][j];
-		}
-	}
-
 	string display_game = "   0     1     2  \n"
 		"      |     |     \n"
-		"0  " + *score_pointer[0][0] + "  |  " + *score_pointer[0][1] + "  |  " + *score_pointer[0][2] + "   \n"
+		"0  " + score[0][0] + "  |  " + score[0][1] + "  |  " + score[0][2] + "   \n"
 		" _ _ _|_ _ _|_ _ _\n"
 		"      |     |     \n"
-		"1  " + *score_pointer[1][0] + "  |  " + *score_pointer[1][1] + "  |  " + *score_pointer[1][2] + "   \n"
+		"1  " + score[1][0] + "  |  " + score[1][1] + "  |  " + score[1][2] + "   \n"
 		" _ _ _|_ _ _|_ _ _\n"
 		"      |     |     \n"
-		"2  " + *score_pointer[2][0] + "  |  " + *score_pointer[2][1] + "  |  " + *score_pointer[2][2] + "   \n"
+		"2  " + score[2][0] + "  |  " + score[2][1] + "  |  " + score[2][2] + "   \n"
 		"      |     |     \n";
 
 
-	cout << display_game;
+	cout << display_game << endl;
+
+	cout << "Player X choose a row: ";
+	cin >> row;
+	cout << "Player X choose a column: ";
+	cin >> column;
+
+	score[row][column] = "X";
+	
+	display_game = "   0     1     2  \n"
+		"      |     |     \n"
+		"0  " + score[0][0] + "  |  " + score[0][1] + "  |  " + score[0][2] + "   \n"
+		" _ _ _|_ _ _|_ _ _\n"
+		"      |     |     \n"
+		"1  " + score[1][0] + "  |  " + score[1][1] + "  |  " + score[1][2] + "   \n"
+		" _ _ _|_ _ _|_ _ _\n"
+		"      |     |     \n"
+		"2  " + score[2][0] + "  |  " + score[2][1] + "  |  " + score[2][2] + "   \n"
+		"      |     |     \n";
+
+	cout << display_game << endl;
+
+
 
 
 
