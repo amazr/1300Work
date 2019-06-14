@@ -8,15 +8,6 @@ int main() {
 	int row;
 	int column;
 	int turnCounter = 0;
-	int xHCounter = 0;
-	int oHCounter = 0;
-	int xVCounter = 0;
-	int oVCounter = 0;
-	int diagCounter = 0;
-	int xDLCounter = 0;
-	int xDRCounter = 0;
-	int oDLCounter = 0;
-	int oDRCounter = 0;
 
 	bool gameOver = false;
 	bool gameDraw = false;
@@ -38,6 +29,12 @@ int main() {
 							{" "," "," "}, 
 							{" "," "," "} };
 
+	//This command will clear the terminal!
+	string clearTerminal = "clear";
+	const char *clearCommand = clearTerminal.c_str();
+	system(clearCommand);
+
+	//Creating the game board and then displaying it down below for the first time
 	string display_game = "   0     1     2  \n"
 		"      |     |     \n"
 		"0  " + score[0][0] + "  |  " + score[0][1] + "  |  " + score[0][2] + "   \n"
@@ -49,7 +46,7 @@ int main() {
 		"2  " + score[2][0] + "  |  " + score[2][1] + "  |  " + score[2][2] + "   \n"
 		"      |     |     \n";
 
-
+	cout << "Welcome to tic tac toe!" << endl;
 	cout << display_game << endl;
 
 	//While loop for the game
@@ -99,67 +96,32 @@ int main() {
 		cout << display_game << endl;
 
 		//Check if someone has won the game
-		if (turnCounter == 4) {
-			for (int i = 0; i < R; i++) {
-				for (int j = 0; j < C; j++) {
-					//Horizontal win check
-					if (score[i][j] == "X") {
-						xHCounter++;
-					}
-					if (score[i][j] == "O") {
-						oHCounter++;
-					}
+		if (turnCounter >= 4) {
 
-					//Vertical win check
-					if (score[j][i] == "X") {
-						xVCounter++;
-					}
-					if (score[j][i] == "O") {
-						oVCounter++;
-					}
+			//Horizontal Win Check
+			if ((score[0][0] == "X" && score[0][1] == "X" && score[0][2] == "X") || (score[1][0] == "X" && score[1][1] == "X" && score[1][2] == "X") || (score[2][0] == "X" && score[2][1] == "X" && score[2][2] == "X")) {
+				gameX = true;
+			}
+			if ((score[0][0] == "O" && score[0][1] == "O" && score[0][2] == "O") || (score[1][0] == "O" && score[1][1] == "O" && score[1][2] == "O") || (score[2][0] == "O" && score[2][1] == "O" && score[2][2] == "O")) {
+				gameO = true;
+			}
 
-					//Diagonal win check
-					if (diagCounter == 0 || diagCounter == 4 || diagCounter == 8) {
-						if (score[i][j] == "X") {
-							xDLCounter++;
-						}
-						if (score[i][j] == "O") {
-							oDLCounter++;
-						}
-					}
+			//Vertical Win Check
+			if ((score[0][0] == "X" && score[1][0] == "X" && score[2][0] == "X") || (score[0][1] == "X" && score[1][1] == "X" && score[2][1] == "X") || (score[0][2] == "X" && score[1][2] == "X" && score[2][2] == "X")) {
+				gameX = true;
+			}
+			if ((score[0][0] == "O" && score[1][0] == "O" && score[2][0] == "O") || (score[0][1] == "O" && score[1][1] == "O" && score[2][1] == "O") || (score[0][2] == "O" && score[1][2] == "O" && score[2][2] == "O")) {
+				gameO = true;
+			}
 
-					if (diagCounter == 2 || diagCounter == 4 || diagCounter == 6) {
-						if (score[i][j] == "X") {
-							xDRCounter++;
-						}
-						if (score[i][j] == "O") {
-							oDRCounter++;
-						}
-					}
-				}
-
-				//set win bool and break the loop if the game was won
-				if (xHCounter == 3 || xVCounter == 3 || xDRCounter == 3 || xDLCounter == 3) {
-					gameX = true;
-					break;
-				}
-				else if (oHCounter == 3 || oVCounter == 3 || oDRCounter == 3 || oDLCounter == 3) {
-					gameO = true;
-					break;
-				}
-
-				//Reset win check counters
-				xHCounter = 0;
-				oHCounter = 0;
-				xVCounter = 0;
-				oVCounter = 0;
+			//Diagonal Win Check
+			if ((score[0][0] == "X" && score[1][1] == "X" && score[2][2] == "X") || (score[0][2] == "X" && score[1][1] == "X" && score[2][0] == "X")) {
+				gameX = true;
+			}
+			if ((score[0][0] == "O" && score[1][1] == "O" && score[2][2] == "O") || (score[0][2] == "O" && score[1][1] == "O" && score[2][0] == "O")) {
+				gameO = true;
 			}
 		}
-
-		xDLCounter = 0;
-		xDRCounter = 0;
-		oDLCounter = 0;
-		oDRCounter = 0;
 
 		//update the current round
 		turnCounter++;
@@ -167,15 +129,61 @@ int main() {
 		//Check for game ending condition bools, display, and break the loop if the game is over
 		if (turnCounter == 9) {
 			cout << draw << endl;
-			break;
+			gameOver = true;
 		}
 		else if (gameX) {
 			cout << xWon << endl;
-			break;
+			gameOver = true;
 		}
 		else if (gameO) {
 			cout << oWon << endl;
-			break;
+			gameOver = true;
+		}
+
+		if (gameOver) {
+
+			//Asks player if they'd like to play again
+			char playagain;
+			cout << "Would you like to play again? ('y'/'n'): ";
+			cin >> playagain;
+			
+			//Stuff for if the player chose to play again
+			if (playagain == 'y') { 
+				system(clearCommand); //Clears terminal
+
+				//Clears array
+				for (int i = 0; i < R; i++) {
+					for (int j = 0; j < C; j++) {
+						score[i][j] = playerReset;
+					}
+				}
+
+				//Clears the game board
+				display_game = "   0     1     2  \n"
+					"      |     |     \n"
+					"0  " + score[0][0] + "  |  " + score[0][1] + "  |  " + score[0][2] + "   \n"
+					" _ _ _|_ _ _|_ _ _\n"
+					"      |     |     \n"
+					"1  " + score[1][0] + "  |  " + score[1][1] + "  |  " + score[1][2] + "   \n"
+					" _ _ _|_ _ _|_ _ _\n"
+					"      |     |     \n"
+					"2  " + score[2][0] + "  |  " + score[2][1] + "  |  " + score[2][2] + "   \n"
+					"      |     |     \n";
+
+				//Clears terminal and displays new board and sets gameOver to false and resets all the counters
+				turnCounter = 0;
+				system(clearCommand);
+				cout << display_game << endl;
+				gameOver = false;
+				gameDraw = false;
+				gameX = false;
+				gameO = false;
+			}
+			else { //If the player did not choose to play again
+				system(clearCommand);
+				cout << "Thanks for playing!!!" << endl;
+				break;
+			}
 		}
 	}
 	return 0;
