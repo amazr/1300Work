@@ -38,8 +38,8 @@ void doQuickSort(vector<int> &quick, int start, int high) {
 void displayList(vector<int>& quick) {
 
 	cout << endl;
-	for (int i = 0; i < quick.size(); i++) {
-		cout << quick.at(i) << " ";
+	for (int elem : quick) {
+		cout << elem << " ";
 	}
 	cout << endl;
 }
