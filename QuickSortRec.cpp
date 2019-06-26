@@ -4,10 +4,10 @@
 #include <ctime>
 using namespace std;
 
-void partition(vector<int> &quick, int start, int &pivotIndex) {
-	//cout << "in partition " <<  "s: " << start << " p: " << pivotIndex << endl;
-	if (start >= pivotIndex) {
-		return;
+int partition(vector<int> &quick, int start, int pivotIndex) {
+
+	if (start == pivotIndex) {
+		return pivotIndex;
 	}
 	else if (quick.at(start) > quick.at(pivotIndex)) {
 
@@ -16,7 +16,7 @@ void partition(vector<int> &quick, int start, int &pivotIndex) {
 		quick.insert(quick.begin() + pivotIndex, temp);
 		pivotIndex--;
 		partition(quick, start, pivotIndex);
-
+			
 	}
 	else {
 		start++;
@@ -25,15 +25,14 @@ void partition(vector<int> &quick, int start, int &pivotIndex) {
 
 }
 
-void doQuickSort(vector<int> &quick, int start, int pivotIndex) {
-	//cout << "in doQuickSort" << "s: " << start << " p: " << pivotIndex << endl;
-	if (start < pivotIndex) {
-		partition(quick, start, pivotIndex);
+void doQuickSort(vector<int> &quick, int start, int high) {
 
-		doQuickSort(quick, start, pivotIndex - 1);
-		doQuickSort(quick, pivotIndex + 1, quick.size() - 1);
+	if (start < high) {
+		int pi = partition(quick, start, high);
+
+		doQuickSort(quick, start, pi - 1);
+		doQuickSort(quick, pi + 1, high);
 	}
-	return;
 }
 
 void displayList(vector<int>& quick) {
